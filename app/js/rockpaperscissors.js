@@ -22,9 +22,7 @@ function randomPlay() {
 ////////////////////////////////////////////////
 
 function hideButtons() {
-    $( "#rock" ).hide();
-    $( "#paper" ).hide();
-    $( '#scissors' ).hide();
+    $( "#newgame" ).hide();
 }
 
 
@@ -107,15 +105,18 @@ function playToFive() {
     while ( true ) {
         if ( playerWins === 5 ) {
             message("You've Won!!!");
+            $( '#newgame' ).show();
             break;
         } else if ( computerWins === 5 ) {
             message("You've lost");
+            $( '#newgame' ).show();
             break;
         } else {
             var playerMove = getPlayerMove();
             var computerMove = getComputerMove();
             if (playerMove === 'q' ) {
-                break;
+            $( '#newgame' ).show();
+            break;
             }
             message('You played ' + playerMove + ' and the computer played ' + computerMove);
             var winner = getWinner( playerMove, computerMove);
@@ -135,11 +136,16 @@ function playToFive() {
 
 $( "#play" ).click(function( event ) {
     event.preventDefault();
-    $( this ).hide( "slow" );
+    $( this ).hide();
     playToFive(); 
 });
 
-
+$( "#newgame" ).click(function( event ) {
+    event.preventDefault();
+    $( '#newgame' ).hide();
+    $( "#play" ).show();
+    playToFive(); 
+});
 
 hideButtons();
 
